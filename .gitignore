@@ -26,3 +26,15 @@ data/raw/
 
 # OS files
 .DS_Store
+
+tempCodeRunnerFile.py
+
+# Logs
+logs/
+
+# Data local
+data/
+
+# Archivos temporales
+tempCodeRunnerFile.py
+
