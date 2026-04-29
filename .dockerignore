@@ -1,0 +1,12 @@
+.env
+.venv
+venv/
+data/
+logs/
+tests/
+__pycache__/
+*.pyc
+*.pyo
+.gitignore
+README.md
+tempCodeRunnerFile.py

@@ -8,44 +8,44 @@ logger.add("logs/transformer.log", rotation="1 MB")
 
 def convert_to_parquet(data, filename_prefix):
     """
-    Convierte datos en un DataFrame de pandas y los guarda en formato Parquet.
+    Converts data into a pandas DataFrame and saves it in Parquet format.
 
-    Este proceso incluye:
-    - Transformación de datos crudos a DataFrame
-    - Generación de un archivo con timestamp para versionado
-    - Guardado en la carpeta data/raw/
-    - Registro del proceso mediante logs
+    This process includes:
+    - Transformation of raw data into a DataFrame
+    - Generation of a timestamped file for versioning
+    - Saving into the data/raw/ folder
+    - Process logging
 
     Args:
-        data (list or dict): Datos obtenidos de la API o etapa de extracción.
-        filename_prefix (str): Prefijo del nombre del archivo de salida.
+        data (list or dict): Data obtained from the API or extraction stage.
+        filename_prefix (str): Prefix for the output file name.
 
     Returns:
-        str: Ruta del archivo Parquet generado.
+        str: Path of the generated Parquet file.
     """
     try:
         logger.info("Converting data to DataFrame...")
 
-        # Convertir datos a DataFrame
+        # Convert data to DataFrame
         df = pd.DataFrame(data)
 
         logger.info(f"DataFrame created with shape: {df.shape}")
 
-        # Crear timestamp para versionado del archivo
+        # Create timestamp for file versioning
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # Construir nombre del archivo
+        # Build file name
         filename = f"{filename_prefix}_{timestamp}.parquet"
 
-        # Definir ruta de guardado
+        # Define save path
         filepath = os.path.join("data", "raw", filename)
 
-        # Asegurar que el directorio exista
+        # Ensure directory exists
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
         logger.info(f"Saving Parquet file to {filepath}...")
 
-        # Guardar DataFrame como Parquet
+         # Save DataFrame as Parquet
         df.to_parquet(filepath, index=False)
 
         logger.info("Parquet file saved successfully.")
